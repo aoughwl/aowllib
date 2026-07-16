@@ -1,0 +1,123 @@
+(.nif27)
+(.indexat 2284             )
+(stmts@,1,examples/inherit.nim
+ (const :Dog.0.dy. .
+  (flexarray
+   (u 32))
+  (aconstr
+   (flexarray
+    (u 32))1294232418u 584711614u 586460001u))
+ (const :Dog.0.vt. . Rtti.0.sysvq0asl
+  (oconstr Rtti.0.sysvq0asl
+   (kv dl.0 3)
+   (kv dy.0
+    (cast
+     (ptr
+      (u 32))Dog.0.dy.))
+   (kv mt.0
+    (aconstr
+     (ptr
+      (void))
+     (nil)))))
+ (type@9,2 :Animal.0.~7 .
+  (object@2 RootObj.0.sysvq0asl@A
+   (fld~7,1 :name.0 .
+    (i@6 64))))
+ (type@6,4 :Dog.0.~4 .
+  (object@2 Animal.0.@A
+   (fld~4,1 :breed.0 .
+    (i@7 64))))
+ (gvar@4,6 :d.0. . Dog.0.@4
+  (oconstr@7 Dog.0.~3
+   (addr Dog.0.vt.)
+   (kv@5 name.0~4 5@2 1~4)
+   (kv@F breed.0~5 9@2)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.syn1lfpjv)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@6,8,examples/inherit.nim d.0.~1 name.0 1))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@6,9,examples/inherit.nim d.0.~1 breed.0 0))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+ (type :`cchar.0.
+  (pragmas
+   (importc "char")
+   (nodecl))
+  (i 8))
+ (gvar :`cmdCount.0.
+  (pragmas
+   (exportc "cmdCount"))
+  (i 32).)
+ (gvar :`cmdLine.0.
+  (pragmas
+   (exportc "cmdLine"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (gvar :`nimEnviron.0.
+  (pragmas
+   (exportc "nimEnviron"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (proc :`main.0.
+  (params
+   (param :`argc.0. .
+    (i 32))
+   (param :`argv.0. .
+    (ptr
+     (ptr `cchar.0.)))
+   (param :`envp.0. .
+    (ptr
+     (ptr `cchar.0.))))
+  (i 32)
+  (pragmas
+   (exportc "main")
+   (smry callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)))
+  (stmts
+   (asgn `cmdCount.0. `argc.0.)
+   (asgn `cmdLine.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`argv.0.))
+   (asgn `nimEnviron.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`envp.0.))
+   (call `ini.0.)
+   (call nimFlushStdStreams.0.sysvq0asl)
+   (ret 0))))(.index@,1,examples/inherit.nim
+ (h Dog.0.dy. 68)
+ (h Dog.0.vt. 117)
+ (h Animal.0. 202)
+ (h Dog.0. 98)
+ (h d.0. 86)
+ (h `iniGuard.0. 123)
+ (x `ini.0. 34)
+ (x `cchar.0. 672)
+ (x `cmdCount.0. 71)
+ (x `cmdLine.0. 68)
+ (x `nimEnviron.0. 84)
+ (x `main.0. 90)
+ (h `argc.0. 27)
+ (h `argv.0. 34)
+ (h `envp.0. 54))

@@ -320,6 +320,14 @@ NU aowllib_ucheck_ab(NU i, NU a, NU b) {
 
 void aowllib_oom_handler(NI size) { (void)size; /* continue-after-OOM: no-op */ }
 
+/* nimChckNilDisp: guard a dynamic (method) dispatch against a nil dispatcher. */
+void aowllib_chck_nil_disp(const void* p) {
+  if (p == NULL) {
+    aowllib_raw_write(2, "cannot dispatch; dispatcher is nil\n", 35);
+    _exit(1);
+  }
+}
+
 /* ======================================================================== */
 /* seq growth (system/seqimpl.nim recalcCap)                                */
 /* ======================================================================== */

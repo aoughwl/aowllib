@@ -142,6 +142,13 @@ upstream in `aifc`) five printer completeness points:
 - **case objects (variant records)** — a `union` inside an object body is now
   emitted as an anonymous C11 union of anonymous structs (one per branch), so
   nimony's flat field access (`v.i`) and flat designated initializers resolve.
+- **inheritance codegen** — four points the `object of RootObj` path needs: an
+  `aconstr` of an *inline* array/flexarray type prints a plain `{…}` aggregate
+  (not a struct-wrapped `.a` compound literal); a `flexarray` *definition* is a
+  real `T x[]` array (not a decayed pointer); a `kv` with an inheritance level
+  qualifies the field with `.Q` (so an inherited field initializes as
+  `.Q.name = …`); and `baseobj` (upcast to a base) is `.Q`-member access, not an
+  invalid cast-to-struct.
 
 `aowllib-cc` itself compiles with `-Werror=implicit-function-declaration`: a
 runtime function called without a prototype would be assumed to return `int`
@@ -150,12 +157,21 @@ error rather than a `-w`-silenced warning.
 
 ## Not yet covered (future work)
 
-**Inheritance / RTTI.** `object of RootObj` (and method dispatch) needs the
-`RootObj`/`Rtti` type-info layouts plus per-type vtable consts — a whole
-subsystem, not a symbol or two — so it is reported as a clean coverage gap
-rather than half-supported. (It also leans on an `aifc` array-const codegen path
-the plain-array cases don't hit.) Value objects, `ref object`, and case objects
-all work; only the `of`-inheritance hierarchy is out.
+**Inheritance / RTTI.** `object of RootObj` works — field access (any depth),
+`ref object of` hierarchies, and **dynamic method dispatch** through the RTTI
+vtable. aowllib provides the `RootObj` (`{ Rtti* vt }`) and `Rtti`
+(`{ int dl; uint32* dy; void* mt[256] }`) type-info layouts plus the
+`nimChckNilDisp` dispatch guard; the per-type vtable consts are emitted into the
+program. `mt` (the method table) is a fixed 256-slot array rather than a
+flexible member so a vtable stays a fully-sized global (ASan-clean); a type with
+more than 256 virtual methods fails loudly at compile.
+
+One inheritance operator is **not** usable, and it's a nimony-compiler issue,
+not an aowllib one: the `of` type test (`x of Derived`) — nimony's
+`vtables_backend.nim` emits an `of` check (`display[level] == hash(T)`) whose
+`level` (0) and target hash don't line up with the type's own display array, so
+the test is always false. aowllib/aifc faithfully execute what nimony emits;
+fixing it means fixing nimony's RTTI `of` lowering.
 
 Also out: exceptions across the `eraiser` error-code path beyond `panic`; float
 `$` (`write(File, float)` works, but `$`-of-float returning a string is not
@@ -163,7 +179,8 @@ wired); the aowl-source `system` module (Phase 2) that would replace this
 hand-written C with code compiled *through* the stack.
 
 (`for c in s` iteration, `s[a..b]` slicing, `s[i] = c` mutation, `newString`,
-and string comparison `==`/`<`/`<=`/`cmp` are all covered now — see above.)
+string comparison `==`/`<`/`<=`/`cmp`, and inheritance with method dispatch are
+all covered now — see above.)
 
 String **indexing** (`s[i]`) *is* covered: because the runtime declares
 `LongString.data` as a pointer, aifc's field-name access `more->data_0[i]`

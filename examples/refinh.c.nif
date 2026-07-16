@@ -1,0 +1,161 @@
+(.nif27)
+(.indexat 3324             )
+(stmts@,1,examples/refinh.nim
+ (const :Square.Obj.0.dy. .
+  (flexarray
+   (u 32))
+  (aconstr
+   (flexarray
+    (u 32))1294232418u 4003658514u 1489961884u))
+ (const :Square.Obj.0.vt. . Rtti.0.sysvq0asl
+  (oconstr Rtti.0.sysvq0asl
+   (kv dl.0 3)
+   (kv dy.0
+    (cast
+     (ptr
+      (u 32))Square.Obj.0.dy.))
+   (kv mt.0
+    (aconstr
+     (ptr
+      (void))
+     (nil)))))
+ (type@8,2 :Shape.0.~6 .
+  (ptr@2 `t.0.IArefSX53hapeX4fbj0refvrhzdm.))
+ (type@8,2 :Shape.Obj.0.~6 .
+  (object@6 RootObj.0.sysvq0asl@A
+   (fld~A,1 :sides.0 .
+    (i@7 64))))
+ (type@9,4 :Square.0.~7 .
+  (ptr@2 `t.0.IArefSX53quareX4fbj0refvrhzdm.))
+ (type@9,4 :Square.Obj.0.~7 .
+  (object@6 Shape.Obj.0.~1,~2
+   (fld~B,1 :size.0 .
+    (i@6 64))))
+ (gvar@4,6 :sq.0. .
+  (ptr@7,~2 `t.0.IArefSX53quareX4fbj0refvrhzdm.).)
+ (type@A,2 :`t.0.IArefSX53hapeX4fbj0refvrhzdm. .
+  (object .
+   (fld :r.00 .
+    (i -1))
+   (fld :d.00 . Shape.Obj.0.@4)))
+ (type@B,4 :`t.0.IArefSX53quareX4fbj0refvrhzdm. .
+  (object .
+   (fld :r.00 .
+    (i -1))
+   (fld :d.00 . Square.Obj.0.@4)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry writeGlobal callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.syn1lfpjv)
+   (var@F,6 :`x.0 .
+    (ptr@D,31,../nimony/lib/std/system/memory.nim
+     (void))
+    (call allocFixed.0.sysvq0asl
+     (sizeof `t.0.IArefSX53quareX4fbj0refvrhzdm.)))
+   (var@F,6 :`tmp.0 .
+    (ptr~4,~2 `t.0.IArefSX53quareX4fbj0refvrhzdm.)
+    (cast
+     (ptr~4,~2 `t.0.IArefSX53quareX4fbj0refvrhzdm.)`x.0))
+   (asgn@F,6
+    (deref `tmp.0)
+    (oconstr `t.0.IArefSX53quareX4fbj0refvrhzdm.
+     (kv r.00 0)
+     (kv d.00
+      (oconstr Square.Obj.0.@,~2
+       (addr Square.Obj.0.vt.)
+       (kv@6 sides.0~5 4@2 1~5)
+       (kv@F size.0~4 10@2)))))
+   (asgn@4,6 sq.0. `tmp.0@B)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@7,8,examples/refinh.nim
+     (dot
+      (deref sq.0.~2)d.00 0)sides.0 1))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@7,9,examples/refinh.nim
+     (dot
+      (deref sq.0.~2)d.00 0)size.0 0))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+ (type :`cchar.0.
+  (pragmas
+   (importc "char")
+   (nodecl))
+  (i 8))
+ (gvar :`cmdCount.0.
+  (pragmas
+   (exportc "cmdCount"))
+  (i 32).)
+ (gvar :`cmdLine.0.
+  (pragmas
+   (exportc "cmdLine"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (gvar :`nimEnviron.0.
+  (pragmas
+   (exportc "nimEnviron"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (proc :`main.0.
+  (params
+   (param :`argc.0. .
+    (i 32))
+   (param :`argv.0. .
+    (ptr
+     (ptr `cchar.0.)))
+   (param :`envp.0. .
+    (ptr
+     (ptr `cchar.0.))))
+  (i 32)
+  (pragmas
+   (exportc "main")
+   (smry writeGlobal callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)))
+  (stmts
+   (asgn `cmdCount.0. `argc.0.)
+   (asgn `cmdLine.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`argv.0.))
+   (asgn `nimEnviron.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`envp.0.))
+   (call `ini.0.)
+   (call nimFlushStdStreams.0.sysvq0asl)
+   (ret 0))))(.index@,1,examples/refinh.nim
+ (h Square.Obj.0.dy. 67)
+ (h Square.Obj.0.vt. 126)
+ (h Shape.0. 216)
+ (h Shape.Obj.0. 71)
+ (h Square.0. 102)
+ (h Square.Obj.0. 73)
+ (h sq.0. 98)
+ (h `t.0.IArefSX53hapeX4fbj0refvrhzdm. 71)
+ (h `t.0.IArefSX53quareX4fbj0refvrhzdm. 123)
+ (h `iniGuard.0. 125)
+ (x `ini.0. 34)
+ (x `cchar.0. 1322)
+ (x `cmdCount.0. 71)
+ (x `cmdLine.0. 68)
+ (x `nimEnviron.0. 84)
+ (x `main.0. 90)
+ (h `argc.0. 27)
+ (h `argv.0. 34)
+ (h `envp.0. 54))

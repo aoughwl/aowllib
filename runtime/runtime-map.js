@@ -13,7 +13,9 @@
 const STRUCTS = `typedef struct { NI fullLen_0; NI rc_0; NI capImpl_0; NC8* data_0; } Aowllib_LongString;
 typedef struct { NU bytes_0; Aowllib_LongString* more_0; } Aowllib_string;
 typedef struct { NI len_0; void* data_0; } Aowllib_seq;
-typedef struct { NI fd; NU flags; } Aowllib_File;`;
+typedef struct { NI fd; NU flags; } Aowllib_File;
+typedef struct Aowllib_Rtti { NI dl_0; NU32* dy_0; void* mt_0[256]; } Aowllib_Rtti;
+typedef struct { const struct Aowllib_Rtti* vt_00; } Aowllib_RootObj;`;
 
 // Externs the shim declares (std handles, always safe to declare).
 const GLOBALS = `extern Aowllib_File aowllib_stdout;
@@ -61,6 +63,7 @@ NU aowllib_ucheck_b(NU, NU);
 NU aowllib_ucheck_ab(NU, NU, NU);
 void aowllib_panic(Aowllib_string);
 void aowllib_oom_handler(NI);
+void aowllib_chck_nil_disp(const void*);
 NB8 aowllib_str_eq(Aowllib_string, Aowllib_string);
 NI aowllib_str_cmp(Aowllib_string, Aowllib_string);
 NB8 aowllib_str_lt(Aowllib_string, Aowllib_string);
@@ -111,6 +114,12 @@ const RUNTIME = {
   string:     { kind: "type", target: "string" },
   seq:        { kind: "type", target: "seq" },
   File:       { kind: "type", target: "File" },
+  // inheritance / RTTI: RootObj is the inheritable base (carries the hidden
+  // type-info pointer); Rtti is the per-type vtable (`{depth, display, methods}`).
+  // Both come from the system module, so a program using `object of RootObj`
+  // references them as externs; aowllib provides the layouts.
+  RootObj:    { kind: "type", target: "RootObj" },
+  Rtti:       { kind: "type", target: "Rtti" },
 
   // --- module init ---
   ini: { kind: "proc", target: "aowllib_noop" },
@@ -203,6 +212,7 @@ const RUNTIME = {
   nimUcheckB:  { kind: "proc", target: "aowllib_ucheck_b" },
   nimUcheckAB: { kind: "proc", target: "aowllib_ucheck_ab" },
   oomHandler: { kind: "proc", target: "aowllib_oom_handler" },
+  nimChckNilDisp: { kind: "proc", target: "aowllib_chck_nil_disp" },
 };
 
 module.exports = { RUNTIME, shimTypedefs, PROTOS, STRUCTS, GLOBALS };

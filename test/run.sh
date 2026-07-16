@@ -36,7 +36,10 @@ EXAMPLES=(hello echo_str echo_int concat loopsum strbuild multi
           # integer extremes and SSO string tier boundaries
           intmin ssobound
           # fixed arrays: const array + array-typed object field
-          constarr arrfield)
+          constarr arrfield
+          # inheritance (object of RootObj): field access, multi-level, ref,
+          # and dynamic method dispatch through the RTTI vtable
+          inherit inh3 refinh method)
 
 if [ "${1:-}" = "--regen" ]; then
   echo "== regenerating .c.nif from .nim =="

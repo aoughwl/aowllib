@@ -127,6 +127,7 @@ NU   aowllib_ucheck_b(NU i, NU b);        /* nimUcheckB:  unsigned i<=b -> i    
 NU   aowllib_ucheck_ab(NU i, NU a, NU b); /* nimUcheckAB: unsigned i-a<=b -> i-a     */
 void aowllib_panic(Aowllib_string s);    /* write s to stderr, exit 1 (noreturn)*/
 void aowllib_oom_handler(NI size);      /* default: continue-after-OOM (no-op)*/
+void aowllib_chck_nil_disp(const void* p); /* method dispatch: nil-dispatcher guard */
 
 /* ---- seq growth (system/seqimpl.nim) ---- */
 NI   aowllib_recalc_cap(NI oldCap, NI added);
