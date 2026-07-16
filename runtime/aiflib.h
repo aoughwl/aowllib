@@ -93,6 +93,7 @@ NI            aiflib_str_len(Aiflib_string s);
 const NC8*    aiflib_str_data(const Aiflib_string* s);
 Aiflib_string aiflib_str_from_bytes(const NC8* p, NI n);
 Aiflib_string aiflib_str_concat(Aiflib_string a, Aiflib_string b);
+Aiflib_string aiflib_str_slice_ab(Aiflib_string s, NI first, NI last);
 NC8           aiflib_str_index(Aiflib_string s, NI i);
 NB8           aiflib_str_eq(Aiflib_string a, Aiflib_string b);
 NI            aiflib_str_cmp(Aiflib_string a, Aiflib_string b);

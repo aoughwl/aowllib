@@ -22,8 +22,10 @@ EXAMPLES=(hello echo_str echo_int concat loopsum strbuild multi
           seqadd seqnest seqassign retseq
           # objects/refs with heap-typed fields (aifc value-dep type ordering)
           refstr objseq
-          # string iteration (for c in s -> toOpenArray)
-          foriter
+          # string iteration (for c in s -> toOpenArray) and slicing (substr)
+          foriter strslice
+          # case objects (variant records -> anonymous C11 union)
+          objvariant
           # bounds checks: array OOB panic, non-zero-based array (nimIcheckAB)
           arroob arrab
           # integer extremes and SSO string tier boundaries

@@ -93,6 +93,7 @@ function typeKind(t) {
   if (t.atom !== undefined) {
     if (/^string\./.test(t.atom)) return "string";
     if (/^cstring/.test(t.atom)) return "cstring";
+    if (/^HSlice\./.test(t.atom)) return "slice";
     return "expr";
   }
   switch (t.tag) {
@@ -171,6 +172,7 @@ function main() {
   const typedefsNeeded = new Set();
   const unmapped = [];
   const openArrayStrSyms = [];   // mangled names of string toOpenArray externs
+  const sliceStrSyms = [];       // mangled names of string []-with-HSlice (substr) externs
   for (const [sym, info] of externs) {
     const c = canon(sym);
     if (!c) continue;
@@ -186,6 +188,12 @@ function main() {
     let target;
     if (typeof entry.resolve === "function") target = entry.resolve(info.args.map(a => classifyArg(a, symtab)), c);
     else target = entry.target;
+    if (target === "@slice") {
+      // string `[]`(HSlice): substr wrapper emitted after the types (below),
+      // because the HSlice parameter type is module-local.
+      sliceStrSyms.push(cName);
+      continue;
+    }
     if (!target) { unmapped.push(`${sym}  (unresolved overload for base '${c.base}')`); continue; }
     if (entry.typedefs) entry.typedefs.forEach(t => typedefsNeeded.add(t));
     if (entry.kind === "type") {
@@ -228,6 +236,34 @@ function main() {
       `  aiflib_oa.${lenFld} = aiflib_str_len(*aiflib_sp);\n` +
       `  return aiflib_oa;\n}`).join("\n");
     const block = "/* ---- aiflib string toOpenArray (generated, after types) ---- */\n" +
+      helpers + "\n\n";
+    const anchor = ["/* --- prototypes --- */", "/* --- procedures --- */"]
+      .find((a) => finalC.includes(a));
+    if (!anchor) {
+      console.error("aiflib-cc: could not find an injection anchor after the type section.");
+      process.exit(3);
+    }
+    finalC = finalC.replace(anchor, block + anchor);
+  }
+
+  // String `[]`(HSlice) substr: like toOpenArray, its HSlice parameter type is
+  // module-local, so emit a real wrapper after the types that decomposes the
+  // HSlice ({a,b}) and calls the fixed aiflib substr entry point.
+  if (sliceStrSyms.length) {
+    const st = finalC.match(/typedef struct (string_\w+)\b/) ||
+               [null, "Aiflib_string"];
+    const hs = finalC.match(
+      /typedef struct (HSlice_\w+) \{\s*NI64\s+(\w+)\s*;\s*NI64\s+(\w+)\s*;\s*\}/);
+    if (!hs) {
+      console.error("aiflib-cc: string slice referenced but no HSlice[int,int] type " +
+        "({NI64 a; NI64 b}) found in the module — cannot bind it.");
+      process.exit(3);
+    }
+    const strType = st[1], [, hsType, aFld, bFld] = hs;
+    const helpers = sliceStrSyms.map((nm) =>
+      `static inline ${strType} ${nm}(${strType} aiflib_s, ${hsType} aiflib_x) {\n` +
+      `  return aiflib_str_slice_ab(aiflib_s, aiflib_x.${aFld}, aiflib_x.${bFld});\n}`).join("\n");
+    const block = "/* ---- aiflib string slice / substr (generated, after types) ---- */\n" +
       helpers + "\n\n";
     const anchor = ["/* --- prototypes --- */", "/* --- procedures --- */"]
       .find((a) => finalC.includes(a));

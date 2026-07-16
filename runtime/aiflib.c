@@ -119,6 +119,17 @@ NI aiflib_str_cmp(Aiflib_string a, Aiflib_string b) {
 NB8 aiflib_str_lt(Aiflib_string a, Aiflib_string b) { return aiflib_str_cmp(a, b) <  0; }
 NB8 aiflib_str_le(Aiflib_string a, Aiflib_string b) { return aiflib_str_cmp(a, b) <= 0; }
 
+/* substr for the inclusive range first..last (mirrors system/stringimpl.nim
+ * substr): first clamps up to 0, last down to high(s); empty range -> "".
+ * Always a fresh string. */
+Aiflib_string aiflib_str_slice_ab(Aiflib_string s, NI first, NI last) {
+  NI sLen = aiflib_str_len(s);
+  NI f = first < 0 ? 0 : first;
+  NI l = (last < sLen - 1 ? last : sLen - 1) + 1;
+  if (l <= f) return aiflib_str_from_bytes(NULL, 0);
+  return aiflib_str_from_bytes(aiflib_str_data(&s) + f, l - f);
+}
+
 Aiflib_string aiflib_str_concat(Aiflib_string a, Aiflib_string b) {
   NI la = aiflib_str_len(a), lb = aiflib_str_len(b);
   NI n = la + lb;

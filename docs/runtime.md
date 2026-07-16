@@ -85,7 +85,7 @@ Symbols the runtime currently provides (see `runtime/runtime-map.js`):
 |---|---|
 | init | `ini` (no-op) |
 | io | `write`(string/char/int/uint/bool/float), `stdout`/`stderr`/`stdin`, `nimFlushStdStreams` |
-| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `[]` (index), `toOpenArray` (for `for c in s`), `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
+| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `[]` (char index) / `[]` (HSlice → substr), `toOpenArray` (for `for c in s`), `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
 | string compare | `==`, `equalStrings` (case-on-string), `<`, `<=`, `cmp` |
 | seq | `recalcCap` (growth) — `alloc`/`realloc`/`allocatedSize` do the rest |
 | memory | `alloc`/`alloc0`/`realloc`/`dealloc`/`allocatedSize`, `allocFixed`/`deallocFixed` |
@@ -114,13 +114,21 @@ complete) returning `{ str_data(s), str_len(s) }`. Only the *string*
 `toOpenArray` is a system extern — the seq/array versions are monomorphised into
 the program.
 
+**String slicing (`s[a..b]`).** `..` builds a program-local `HSlice{a,b}`, then
+`[]`(string, HSlice) returns a fresh substring. `aiflib-cc` tells this apart
+from char indexing by the second argument's type (an `HSlice.*` type → slice),
+and — because the `HSlice` parameter type is again module-local — emits a real
+after-types wrapper that decomposes the slice and calls the fixed
+`aiflib_str_slice_ab(s, a, b)` (inclusive range, `a` clamped up to 0, `b` down
+to `high(s)`, empty range → `""`).
+
 Anything unmapped is printed as a coverage gap and the build fails — the runtime
 is never silently stubbed.
 
 ## aifc dependencies
 
 aiflib links `aifc`'s printed C. Building the suite exercised (and fixed
-upstream in `aifc`) four printer completeness points:
+upstream in `aifc`) five printer completeness points:
 
 - `(ovf)` — read the overflow flag `(keepovf …)` sets (needed by seq bounds).
 - prototypes for **inline** procs — a monomorphised `static inline` seq helper
@@ -131,6 +139,9 @@ upstream in `aifc`) four printer completeness points:
   field of another struct (e.g. `object` with a `seq` field) is now emitted
   *after* that field type's full definition, since C requires a complete type
   for a value member (the forward decls above only satisfy pointers).
+- **case objects (variant records)** — a `union` inside an object body is now
+  emitted as an anonymous C11 union of anonymous structs (one per branch), so
+  nimony's flat field access (`v.i`) and flat designated initializers resolve.
 
 `aiflib-cc` itself compiles with `-Werror=implicit-function-declaration`: a
 runtime function called without a prototype would be assumed to return `int`

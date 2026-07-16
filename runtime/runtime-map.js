@@ -32,6 +32,7 @@ void aiflib_write_float(Aiflib_File, NF64);
 void aiflib_flush_std_streams(void);
 void aiflib_noop(void);
 Aiflib_string aiflib_str_concat(Aiflib_string, Aiflib_string);
+Aiflib_string aiflib_str_slice_ab(Aiflib_string, NI, NI);
 NC8 aiflib_str_index(Aiflib_string, NI);
 void aiflib_str_add_char(Aiflib_string*, NC8);
 void aiflib_str_add_str(Aiflib_string*, Aiflib_string);
@@ -121,9 +122,14 @@ const RUNTIME = {
 
   // --- strings ---
   "&":  { kind: "proc", target: "aiflib_str_concat" },
+  // string `[]`: char index (2nd arg int) -> aiflib_str_index; slice (2nd arg
+  // HSlice) -> substr, emitted as an after-types wrapper (marker "@slice",
+  // handled in aiflib-cc because HSlice is a module-local type).  seq/openArray
+  // `[]` are monomorphised locally, never externs.
   "[]": { kind: "proc", resolve: (kinds) =>
-            (kinds[0] === "string" || kinds[0] === "expr" || kinds[0] === "none")
-              ? "aiflib_str_index" : null },   // seq/openArray `[]` are local, not externs
+            kinds[kinds.length - 1] === "slice" ? "@slice"
+            : (kinds[0] === "string" || kinds[0] === "expr" || kinds[0] === "none")
+              ? "aiflib_str_index" : null },
   "$":  { kind: "proc", resolve: (kinds) => ({ int: "aiflib_dollar_int", uint: "aiflib_dollar_uint", bool: "aiflib_dollar_bool" }[kinds[0]] || "aiflib_dollar_int") },
   add:  { kind: "proc", resolve: (kinds) => (kinds[kinds.length - 1] === "char" ? "aiflib_str_add_char" : "aiflib_str_add_str") },
   len:  { kind: "proc", target: "aiflib_str_len" },

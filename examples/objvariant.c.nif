@@ -1,0 +1,154 @@
+(.nif27)
+(.indexat 3060             )
+(stmts@,1,examples/objvariant.nim
+ (type@7,2 :Kind.0.~5 .
+  (enum@2
+   (u 8)
+   (efld@5 :kInt.0. 0)
+   (efld@B :kStr.0. 1)))
+ (type@6,3 :Val.0.~4 .
+  (object@2 .
+   (fld~4,1 :tag.0 .
+    (i@5 64))
+   (fld@1,2 :kind.0 . Kind.0.@6)
+   (union~4,3
+    (object@9 .
+     (fld :i.0 .
+      (i@3 64)))
+    (object@9,1 .
+     (fld :s.0 . string.0.sysvq0asl@3)))))
+ (proc@,8 :show.0.@5
+  (params@9
+   (param@1 :v.0 .
+    (ptr@3 Val.0.))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (case
+    (dot@6
+     (deref~1 v.0)kind.0 0)
+    (of@,1
+     (ranges@3 0@9,~8)
+     (stmts@9
+      (stmts@2,7a,../nimony/lib/std/syncio.nim
+       (stmts@2,2
+        (call write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+         (dot@H,B,examples/objvariant.nim
+          (deref~1 v.0)i.0 0)))
+       (call@,3 write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E))))
+    (of@,2
+     (ranges@3 1@F,~9)
+     (stmts@9
+      (stmts@2,7a,../nimony/lib/std/syncio.nim
+       (stmts@2,2
+        (call write.0.syn1lfpjv stdout.0.syn1lfpjv@6
+         (dot@H,C,examples/objvariant.nim
+          (deref~1 v.0)s.0 0)))
+       (call@,3 write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))))))
+ (gvar@4,C :a.0. . Val.0.@9,~4
+  (oconstr@7 Val.0.@2,~4
+   (kv@4 tag.0~3 1@2)
+   (kv@D kind.0~4 0~A,~A)
+   (kv@M i.0~1 42@2)))
+ (gvar@4,D :b.0. . Val.0.@9,~5
+  (oconstr@7 Val.0.@2,~5
+   (kv@4 tag.0~3 2@2)
+   (kv@D kind.0~4 1~4,~B)
+   (kv@M s.0~1
+    (oconstr@2 string.0.sysvq0asl
+     (kv bytes.0 122511465736197u)
+     (kv more.0
+      (nil))))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.syn1lfpjv)
+   (call@4,E show.0.~4
+    (addr@1 a.0.))
+   (call@4,F show.0.~4
+    (addr@1 b.0.))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@6,H,examples/objvariant.nim a.0.~1 tag.0 0))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+ (type :`cchar.0.
+  (pragmas
+   (importc "char")
+   (nodecl))
+  (i 8))
+ (gvar :`cmdCount.0.
+  (pragmas
+   (exportc "cmdCount"))
+  (i 32).)
+ (gvar :`cmdLine.0.
+  (pragmas
+   (exportc "cmdLine"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (gvar :`nimEnviron.0.
+  (pragmas
+   (exportc "nimEnviron"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (proc :`main.0.
+  (params
+   (param :`argc.0. .
+    (i 32))
+   (param :`argv.0. .
+    (ptr
+     (ptr `cchar.0.)))
+   (param :`envp.0. .
+    (ptr
+     (ptr `cchar.0.))))
+  (i 32)
+  (pragmas
+   (exportc "main")
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)))
+  (stmts
+   (asgn `cmdCount.0. `argc.0.)
+   (asgn `cmdLine.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`argv.0.))
+   (asgn `nimEnviron.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`envp.0.))
+   (call `ini.0.)
+   (call nimFlushStdStreams.0.sysvq0asl)
+   (ret 0))))(.index@,1,examples/objvariant.nim
+ (h Kind.0. 71)
+ (x@9,2 kInt.0. 43)
+ (x@9,2 kStr.0. 23)
+ (h Val.0. 25)
+ (x show.0. 230)
+ (h a.0. 824)
+ (h b.0. 127)
+ (h `iniGuard.0. 221)
+ (x `ini.0. 34)
+ (x `cchar.0. 555)
+ (x `cmdCount.0. 71)
+ (x `cmdLine.0. 68)
+ (x `nimEnviron.0. 84)
+ (x `main.0. 90)
+ (h `argc.0. 27)
+ (h `argv.0. 34)
+ (h `envp.0. 54))
