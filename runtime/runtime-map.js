@@ -34,6 +34,8 @@ void aiflib_noop(void);
 Aiflib_string aiflib_str_concat(Aiflib_string, Aiflib_string);
 Aiflib_string aiflib_str_slice_ab(Aiflib_string, NI, NI);
 NC8 aiflib_str_index(Aiflib_string, NI);
+void aiflib_str_index_set(Aiflib_string*, NI, NC8);
+Aiflib_string aiflib_new_string(NI);
 void aiflib_str_add_char(Aiflib_string*, NC8);
 void aiflib_str_add_str(Aiflib_string*, Aiflib_string);
 Aiflib_string aiflib_dollar_int(NI64);
@@ -133,6 +135,13 @@ const RUNTIME = {
   "$":  { kind: "proc", resolve: (kinds) => ({ int: "aiflib_dollar_int", uint: "aiflib_dollar_uint", bool: "aiflib_dollar_bool" }[kinds[0]] || "aiflib_dollar_int") },
   add:  { kind: "proc", resolve: (kinds) => (kinds[kinds.length - 1] === "char" ? "aiflib_str_add_char" : "aiflib_str_add_str") },
   len:  { kind: "proc", target: "aiflib_str_len" },
+  newString: { kind: "proc", target: "aiflib_new_string" },
+  // string `[]=`(i, c): in-place char mutation (COW-safe).  Only string `[]=`
+  // reaches as an extern (seq `[]=` is monomorphised locally); resolve by the
+  // container arg's type so a non-string `[]=` stays a coverage gap.
+  "[]=": { kind: "proc", resolve: (kinds) =>
+             (kinds[0] === "string" || kinds[0] === "expr" || kinds[0] === "none")
+               ? "aiflib_str_index_set" : null },
   // `for c in s` lowers to `toOpenArray(s)` returning an openArray[char]
   // ({NC8* a; NI len}).  Only the *string* toOpenArray reaches the linker as a
   // system extern (seq/array versions are monomorphised locally).  Its return

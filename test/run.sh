@@ -26,6 +26,11 @@ EXAMPLES=(hello echo_str echo_int concat loopsum strbuild multi
           foriter strslice
           # case objects (variant records -> anonymous C11 union)
           objvariant
+          # string mutation: newString + []= , COW on aliased/heap/static
+          newstr strmut
+          # more seqs: seq[string] iteration+concat, high/low, seq equality,
+          # heap-tier string built by repeated concatenation
+          seqstrjoin highlow seqeq bigheap
           # bounds checks: array OOB panic, non-zero-based array (nimIcheckAB)
           arroob arrab
           # integer extremes and SSO string tier boundaries

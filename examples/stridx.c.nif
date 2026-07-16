@@ -1,6 +1,6 @@
 (.nif27)
-(.indexat 1965             )
-(stmts@,1,stridx.nim
+(.indexat 1974             )
+(stmts@,1,examples/stridx.nim
  (gvar@4,1 :s.0. . string.0.sysvq0asl
   (oconstr@4 string.0.sysvq0asl
    (kv bytes.0 34179897038040582u)
@@ -22,15 +22,15 @@
    (call `ini.0.sysvq0asl)
    (call `ini.0.syn1lfpjv)
    (var@5,2 :`x.0 .
-    (c@L,6V,../../nimony/lib/std/system/stringimpl.nim 8)
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
     (call \5B\5D.9.sysvq0asl s.0. 0@2))
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.0@5,3,stridx.nim)
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.0@5,3,examples/stridx.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
    (var@5,3 :`x.1 .
-    (c@L,6V,../../nimony/lib/std/system/stringimpl.nim 8)
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
     (call \5B\5D.9.sysvq0asl s.0. 5@2))
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.1@5,4,stridx.nim)
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.1@5,4,examples/stridx.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
  (type :`cchar.0.
   (pragmas
    (importc "char")
@@ -83,8 +83,8 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,stridx.nim
- (h s.0. 58)
+   (ret 0))))(.index@,1,examples/stridx.nim
+ (h s.0. 67)
  (h `iniGuard.0. 132)
  (x `ini.0. 34)
  (x `cchar.0. 857)

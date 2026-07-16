@@ -1,0 +1,4 @@
+this is a fairly long heap string
+Xhis is a fairly long heap string
+Znother long literal over fourteen chars
+Hello

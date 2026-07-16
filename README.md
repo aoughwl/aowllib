@@ -6,12 +6,12 @@ nimony programs — `echo`, strings, seqs, `ref` objects with ARC — link and r
 natively** through [aifc](https://github.com/aoughwl/aifc), with **no** nimony
 54 KB `system.c.nif`.
 
-> Status: **working.** `echo "hello"` and 31 other programs — strings (concat,
-> build, `$`, indexing, `==`/`<`/`<=`, `case`-on-string, `for c in s`, slicing), seqs
+> Status: **working.** `echo "hello"` and 37 other programs — strings (concat,
+> build, `$`, indexing, `==`/`<`/`<=`, `case`-on-string, `for c in s`, slicing, mutation), seqs
 > (growth, nesting, assignment, return-by-value, bounds checks), case objects, `object`/`ref`
 > with heap-typed fields, non-zero-based arrays with bounds panics, `INT64_MIN`
 > and SSO tier boundaries — compile to native binaries through `aifc` + `aiflib`
-> and pass a 32/32 acceptance suite, **ASan/UBSan/LSan-clean, leak-free**. This
+> and pass a 38/38 acceptance suite, **ASan/UBSan/LSan-clean, leak-free**. This
 > is the biggest unlock in the
 > [aifmony](https://github.com/aoughwl/aifmony) rewrite: it's what lets a program
 > compile *natively* through the self-owned stack instead of running under the
@@ -35,7 +35,7 @@ npm run test:regen  # also regenerate each .c.nif from its .nim first (needs nim
   ok    objseq     4
   ok    arroob     index out of bounds: 5 notin 0..2
   …
-  32/32 passed
+  38/38 passed
 ```
 
 ## What it is

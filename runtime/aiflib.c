@@ -98,6 +98,45 @@ NC8 aiflib_str_index(Aiflib_string s, NI i) {
   return aiflib_str_data(&s)[i];   /* nimony emits the bounds check at the call site */
 }
 
+/* newString(n): a fresh, zero-filled string of length n (mirrors
+ * system/stringimpl.nim newString). */
+Aiflib_string aiflib_new_string(NI n) {
+  Aiflib_string s; s.bytes_0 = 0; s.more_0 = NULL;
+  if (n <= 0) return s;
+  if (n <= AIFLIB_PAYLOAD_SIZE) {
+    ((unsigned char*)&s.bytes_0)[0] = (unsigned char)n;
+    memset((char*)&s.bytes_0 + 1, 0, (size_t)n);
+  } else {
+    Aiflib_LongString* h = aiflib_longstr_new(NULL, n);   /* header + data + NUL, unshared */
+    memset(h->data_0, 0, (size_t)n);
+    s.more_0 = h;
+    ((unsigned char*)&s.bytes_0)[0] = AIFLIB_HEAP_SLEN;
+  }
+  return s;
+}
+
+/* prepareMutation: ensure s owns its data uniquely before an in-place write
+ * (mirrors system/stringimpl.nim).  Short/medium strings are always unique
+ * inline; a static (literal) or shared heap string is copied into a fresh
+ * unique heap block. */
+static void aiflib_str_prepare_mutation(Aiflib_string* s) {
+  unsigned sl = aiflib_slen(s);
+  if (sl == AIFLIB_STATIC_SLEN ||
+      (sl == AIFLIB_HEAP_SLEN && !aiflib_arc_is_unique(&s->more_0->rc_0))) {
+    Aiflib_LongString* old = s->more_0;
+    if (sl == AIFLIB_HEAP_SLEN) aiflib_arc_dec(&old->rc_0);   /* drop our shared ref */
+    s->more_0 = aiflib_longstr_new(old->data_0, old->fullLen_0);
+    ((unsigned char*)&s->bytes_0)[0] = AIFLIB_HEAP_SLEN;
+  }
+}
+
+/* []=(s, i, c): mutate the char at index i (bounds check emitted at call site).
+ * COW-safe: a shared/static string is privatised first. */
+void aiflib_str_index_set(Aiflib_string* s, NI i, NC8 c) {
+  aiflib_str_prepare_mutation(s);
+  ((NC8*)aiflib_str_data(s))[i] = c;
+}
+
 /* Byte equality (mirrors system/stringimpl.nim equalStrings, tier-independent:
  * equal length and equal bytes).  Empty strings compare equal. */
 NB8 aiflib_str_eq(Aiflib_string a, Aiflib_string b) {

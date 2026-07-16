@@ -95,6 +95,8 @@ Aiflib_string aiflib_str_from_bytes(const NC8* p, NI n);
 Aiflib_string aiflib_str_concat(Aiflib_string a, Aiflib_string b);
 Aiflib_string aiflib_str_slice_ab(Aiflib_string s, NI first, NI last);
 NC8           aiflib_str_index(Aiflib_string s, NI i);
+void          aiflib_str_index_set(Aiflib_string* s, NI i, NC8 c);
+Aiflib_string aiflib_new_string(NI n);
 NB8           aiflib_str_eq(Aiflib_string a, Aiflib_string b);
 NI            aiflib_str_cmp(Aiflib_string a, Aiflib_string b);
 NB8           aiflib_str_lt(Aiflib_string a, Aiflib_string b);

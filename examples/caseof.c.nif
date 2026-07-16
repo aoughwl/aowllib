@@ -1,6 +1,6 @@
 (.nif27)
-(.indexat 2323             )
-(stmts@,1,caseof.nim
+(.indexat 2350             )
+(stmts@,1,examples/caseof.nim
  (gvar@4,1 :x.0. .
   (i 64)3@4)
  (gvar :`iniGuard.0. .
@@ -22,10 +22,10 @@
     (of@,1
      (ranges@3 1)
      (stmts@6
-      (stmts@2,7a,../../nimony/lib/std/syncio.nim
+      (stmts@2,7a,../nimony/lib/std/syncio.nim
        (stmts@2,2
         (call write.0.syn1lfpjv stdout.0.syn1lfpjv@6
-         (oconstr@B,4,caseof.nim string.0.sysvq0asl
+         (oconstr@B,4,examples/caseof.nim string.0.sysvq0asl
           (kv bytes.0 1701736195u)
           (kv more.0
            (nil)))))
@@ -33,20 +33,20 @@
     (of@,2
      (ranges@3 3)
      (stmts@6
-      (stmts@2,7a,../../nimony/lib/std/syncio.nim
+      (stmts@2,7a,../nimony/lib/std/syncio.nim
        (stmts@2,2
         (call write.0.syn1lfpjv stdout.0.syn1lfpjv@6
-         (oconstr@B,5,caseof.nim string.0.sysvq0asl
+         (oconstr@B,5,examples/caseof.nim string.0.sysvq0asl
           (kv bytes.0 111486385550341u)
           (kv more.0
            (nil)))))
        (call@,3 write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E))))
     (else@,3
      (stmts@6
-      (stmts@2,7a,../../nimony/lib/std/syncio.nim
+      (stmts@2,7a,../nimony/lib/std/syncio.nim
        (stmts@2,2
         (call write.0.syn1lfpjv stdout.0.syn1lfpjv@6
-         (oconstr@B,6,caseof.nim string.0.sysvq0asl
+         (oconstr@B,6,examples/caseof.nim string.0.sysvq0asl
           (kv bytes.0 125779869724421u)
           (kv more.0
            (nil)))))
@@ -103,11 +103,11 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,caseof.nim
- (h x.0. 58)
+   (ret 0))))(.index@,1,examples/caseof.nim
+ (h x.0. 67)
  (h `iniGuard.0. 32)
  (x `ini.0. 34)
- (x `cchar.0. 1315)
+ (x `cchar.0. 1333)
  (x `cmdCount.0. 71)
  (x `cmdLine.0. 68)
  (x `nimEnviron.0. 84)

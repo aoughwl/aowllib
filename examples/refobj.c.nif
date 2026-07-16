@@ -1,15 +1,15 @@
 (.nif27)
-(.indexat 2312             )
-(stmts@,1,refobj.nim
+(.indexat 2328             )
+(stmts@,1,examples/refobj.nim
  (type@A,1 :Node.0.~5 .
-  (ptr@2 `t.0.IArefSX4eodeX4fbj0refhgxp9i.))
+  (ptr@2 `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.))
  (type@A,1 :Node.Obj.0.~5 .
   (object@6 .
    (fld~E,1 :val.0 .
     (i@5 64))))
  (gvar@4,3 :n.0. .
-  (ptr@8,~2 `t.0.IArefSX4eodeX4fbj0refhgxp9i.).)
- (type@C,1 :`t.0.IArefSX4eodeX4fbj0refhgxp9i. .
+  (ptr@8,~2 `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.).)
+ (type@C,1 :`t.0.IArefSX4eodeX4fbj0ref9vt5ra1. .
   (object .
    (fld :r.00 .
     (i -1))
@@ -30,27 +30,27 @@
    (call `ini.0.sysvq0asl)
    (call `ini.0.syn1lfpjv)
    (var@C,3 :`x.0 .
-    (ptr@D,31,../../nimony/lib/std/system/memory.nim
+    (ptr@D,31,../nimony/lib/std/system/memory.nim
      (void))
     (call allocFixed.0.sysvq0asl
-     (sizeof `t.0.IArefSX4eodeX4fbj0refhgxp9i.)))
+     (sizeof `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.)))
    (var@C,3 :`tmp.0 .
-    (ptr@,~2 `t.0.IArefSX4eodeX4fbj0refhgxp9i.)
+    (ptr@,~2 `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.)
     (cast
-     (ptr@,~2 `t.0.IArefSX4eodeX4fbj0refhgxp9i.)`x.0))
+     (ptr@,~2 `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.)`x.0))
    (asgn@C,3
     (deref `tmp.0)
-    (oconstr `t.0.IArefSX4eodeX4fbj0refhgxp9i.
+    (oconstr `t.0.IArefSX4eodeX4fbj0ref9vt5ra1.
      (kv r.00 0)
      (kv d.00
       (oconstr Node.Obj.0.@4,~2
        (kv@4 val.0~3 7@2)))))
    (asgn@4,3 n.0. `tmp.0@8)
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
-    (dot@6,5,refobj.nim
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6
+    (dot@6,5,examples/refobj.nim
      (dot
       (deref n.0.~1)d.00 0)val.0 0))
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
  (type :`cchar.0.
   (pragmas
    (importc "char")
@@ -103,14 +103,14 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,refobj.nim
- (h Node.0. 58)
- (h Node.Obj.0. 69)
+   (ret 0))))(.index@,1,examples/refobj.nim
+ (h Node.0. 67)
+ (h Node.Obj.0. 70)
  (h n.0. 79)
- (h `t.0.IArefSX4eodeX4fbj0refhgxp9i. 68)
- (h `iniGuard.0. 121)
+ (h `t.0.IArefSX4eodeX4fbj0ref9vt5ra1. 69)
+ (h `iniGuard.0. 122)
  (x `ini.0. 34)
- (x `cchar.0. 987)
+ (x `cchar.0. 991)
  (x `cmdCount.0. 71)
  (x `cmdLine.0. 68)
  (x `nimEnviron.0. 84)

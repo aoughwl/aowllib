@@ -85,7 +85,7 @@ Symbols the runtime currently provides (see `runtime/runtime-map.js`):
 |---|---|
 | init | `ini` (no-op) |
 | io | `write`(string/char/int/uint/bool/float), `stdout`/`stderr`/`stdin`, `nimFlushStdStreams` |
-| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `[]` (char index) / `[]` (HSlice → substr), `toOpenArray` (for `for c in s`), `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
+| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `[]` (char index) / `[]` (HSlice → substr), `[]=` (COW char store), `newString`, `toOpenArray` (for `for c in s`), `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
 | string compare | `==`, `equalStrings` (case-on-string), `<`, `<=`, `cmp` |
 | seq | `recalcCap` (growth) — `alloc`/`realloc`/`allocatedSize` do the rest |
 | memory | `alloc`/`alloc0`/`realloc`/`dealloc`/`allocatedSize`, `allocFixed`/`deallocFixed` |

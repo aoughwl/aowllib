@@ -1,0 +1,131 @@
+(.nif27)
+(.indexat 3198             )
+(stmts@,1,examples/strmut.nim
+ (const@8,1 :strlit.0.I2694698568881190278. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 33)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "this is a fairly long heap string")))
+ (const@A,6 :strlit.0.I8757100874311258080. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 40)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "another long literal over fourteen chars")))
+ (gvar@4,1 :a.0. . string.0.sysvq0asl
+  (oconstr@4 string.0.sysvq0asl
+   (kv bytes.0 8316213866978112766u)
+   (kv more.0
+    (addr strlit.0.I2694698568881190278.))))
+ (gvar@4,2 :b.0. . string.0.sysvq0asl .)
+ (gvar@4,6 :lit.0. . string.0.sysvq0asl
+  (oconstr@6 string.0.sysvq0asl
+   (kv bytes.0 8243109542266561022u)
+   (kv more.0
+    (addr strlit.0.I8757100874311258080.))))
+ (gvar@4,9 :short.0. . string.0.sysvq0asl
+  (oconstr@8 string.0.sysvq0asl
+   (kv bytes.0 122511465736197u)
+   (kv more.0
+    (nil))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.syn1lfpjv)
+   (asgn@4,2 b.0.
+    (call@4 =dup.2.sysvq0asl a.0.))
+   (call@,3 \5B\5D=.9.sysvq0asl
+    (addr b.0.)0@2 'X'@7)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 a.0.@5,5,examples/strmut.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 b.0.@5,6,examples/strmut.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@,7 \5B\5D=.9.sysvq0asl
+    (addr lit.0.)0@4 'Z'@9)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 lit.0.@5,9,examples/strmut.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@,A \5B\5D=.9.sysvq0asl
+    (addr short.0.)0@6 'H'@B)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 short.0.@5,C,examples/strmut.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+ (type :`cchar.0.
+  (pragmas
+   (importc "char")
+   (nodecl))
+  (i 8))
+ (gvar :`cmdCount.0.
+  (pragmas
+   (exportc "cmdCount"))
+  (i 32).)
+ (gvar :`cmdLine.0.
+  (pragmas
+   (exportc "cmdLine"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (gvar :`nimEnviron.0.
+  (pragmas
+   (exportc "nimEnviron"))
+  (ptr
+   (ptr
+    (c 8))).)
+ (proc :`main.0.
+  (params
+   (param :`argc.0. .
+    (i 32))
+   (param :`argv.0. .
+    (ptr
+     (ptr `cchar.0.)))
+   (param :`envp.0. .
+    (ptr
+     (ptr `cchar.0.))))
+  (i 32)
+  (pragmas
+   (exportc "main")
+   (smry callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)))
+  (stmts
+   (asgn `cmdCount.0. `argc.0.)
+   (asgn `cmdLine.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`argv.0.))
+   (asgn `nimEnviron.0.
+    (cast
+     (ptr
+      (ptr
+       (c 8)))`envp.0.))
+   (call `ini.0.)
+   (call nimFlushStdStreams.0.sysvq0asl)
+   (ret 0))))(.index@,1,examples/strmut.nim
+ (h strlit.0.I2694698568881190278. 67)
+ (h strlit.0.I8757100874311258080. 212)
+ (h a.0. 219)
+ (h b.0. 166)
+ (h lit.0. 41)
+ (h short.0. 168)
+ (h `iniGuard.0. 134)
+ (x `ini.0. 34)
+ (x `cchar.0. 1273)
+ (x `cmdCount.0. 71)
+ (x `cmdLine.0. 68)
+ (x `nimEnviron.0. 84)
+ (x `main.0. 90)
+ (h `argc.0. 27)
+ (h `argv.0. 34)
+ (h `envp.0. 54))

@@ -1,23 +1,13 @@
 (.nif27)
-(.indexat 2482             )
-(stmts@,1,examples/longstr.nim
- (const@8,1 :strlit.0.I13766342269811135216. . LongString.0.sysvq0asl
-  (oconstr LongString.0.sysvq0asl
-   (kv fullLen.0 20)
-   (kv rc.0 0)
-   (kv capImpl.0 0)
-   (kv data.0 "the quick brown fox ")))
- (const@6,2 :strlit.0.I6515095658418246558. . LongString.0.sysvq0asl
-  (oconstr LongString.0.sysvq0asl
-   (kv fullLen.0 23)
-   (kv rc.0 0)
-   (kv capImpl.0 0)
-   (kv data.0 "jumps over the lazy dog")))
+(.indexat 2758             )
+(stmts@,1,examples/bigheap.nim
  (gvar@4,1 :s.0. . string.0.sysvq0asl
   (oconstr@4 string.0.sysvq0asl
-   (kv bytes.0 7599104330211816702u)
+   (kv bytes.0 0u)
    (kv more.0
-    (addr strlit.0.I13766342269811135216.))))
+    (nil))))
+ (gvar@4,2 :i.0. .
+  (i 64)0@4)
  (gvar :`iniGuard.0. .
   (bool).)
  (proc :`ini.0.
@@ -33,18 +23,37 @@
     (true))
    (call `ini.0.sysvq0asl)
    (call `ini.0.syn1lfpjv)
-   (call@5,2 add.2.sysvq0asl~3
-    (addr~5 s.0.)
-    (oconstr@1 string.0.sysvq0asl
-     (kv bytes.0 8007527064174684926u)
-     (kv more.0
-      (addr strlit.0.I6515095658418246558.))))
-   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 s.0.@5,4,examples/longstr.nim)
-   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
-   (var@6,4 :`x.0 .
+   (scope@,3
+    (stmts
+     (while
+      (lt@8 i.0.~2 500@2)
+      (stmts@2,1
+       (var@6 :`lhs.0 . string.0.sysvq0asl~4,~3
+        (call &.0.sysvq0asl s.0.~2
+         (oconstr@2 string.0.sysvq0asl
+          (kv bytes.0 30721u)
+          (kv more.0
+           (nil)))))
+       (call =destroy.2.sysvq0asl s.0.)
+       (asgn@2 s.0.~2 `lhs.0@4)
+       (asgn@2,1 i.0.~2
+        (add@4
+         (i 64)i.0.~2 1@2))))))
+   (lab@,3 :whileStmtLabel.0)
+   (var@6,6 :`x.0 .
     (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
     (call len.4.sysvq0asl@1 s.0.~1))
-   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 `x.0@6,5,examples/longstr.nim)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 `x.0@6,7,examples/bigheap.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (var@5,7 :`x.1 .
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
+    (call \5B\5D.9.sysvq0asl s.0. 0@2))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.1@5,8,examples/bigheap.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (var@5,8 :`x.2 .
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
+    (call \5B\5D.9.sysvq0asl s.0. 499@2))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 `x.2@5,9,examples/bigheap.nim)
    (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
  (type :`cchar.0.
   (pragmas
@@ -98,13 +107,12 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,examples/longstr.nim
- (h strlit.0.I13766342269811135216. 68)
- (h strlit.0.I6515095658418246558. 200)
- (h s.0. 202)
- (h `iniGuard.0. 167)
+   (ret 0))))(.index@,1,examples/bigheap.nim
+ (h s.0. 68)
+ (h i.0. 116)
+ (h `iniGuard.0. 32)
  (x `ini.0. 34)
- (x `cchar.0. 927)
+ (x `cchar.0. 1624)
  (x `cmdCount.0. 71)
  (x `cmdLine.0. 68)
  (x `nimEnviron.0. 84)

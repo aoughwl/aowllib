@@ -1,21 +1,21 @@
 (.nif27)
-(.indexat 2907             )
-(stmts@,1,strbuild.nim
+(.indexat 2919             )
+(stmts@,1,examples/strbuild.nim
  (gvar@4,1 :s.0. . string.0.sysvq0asl
   (oconstr@4 string.0.sysvq0asl
    (kv bytes.0 0u)
    (kv more.0
     (nil))))
- (proc@4,5,../../nimony/lib/std/system/iterators.nim :inc.1.Irn1g7r1.
-  (params@L,E,../../nimony/lib/std/system/arithmetics.nim
+ (proc@4,5,../nimony/lib/std/system/iterators.nim :inc.1.Irn1g7r1.
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
    (param@1 :x.1 .
     (ptr@3
-     (i 64)))).@,E,../../nimony/lib/std/system/arithmetics.nim
-  (pragmas@W,E,../../nimony/lib/std/system/arithmetics.nim
+     (i 64)))).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
    (inline 0 20)
-   (smry@4,5,../../nimony/lib/std/system/iterators.nim
+   (smry@4,5,../nimony/lib/std/system/iterators.nim
     (param 0 0 reads writes)))
-  (stmts@2,F,../../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
    (asgn@2,1
     (deref~2 x.1)
     (add@6
@@ -40,11 +40,11 @@
    (call `ini.0.syn1lfpjv)
    (scope@4,2
     (stmts
-     (var@S,1,../../nimony/lib/std/system/iterators.nim :`lf.0 .
-      (i 64)0@9,3,strbuild.nim)
-     (var@V,1,../../nimony/lib/std/system/iterators.nim :`lf.1 .
-      (i 64)3@F,3,strbuild.nim)
-     (stmts@2,2,../../nimony/lib/std/system/iterators.nim
+     (var@S,1,../nimony/lib/std/system/iterators.nim :`lf.0 .
+      (i 64)0@9,3,examples/strbuild.nim)
+     (var@V,1,../nimony/lib/std/system/iterators.nim :`lf.1 .
+      (i 64)3@F,3,examples/strbuild.nim)
+     (stmts@2,2,../nimony/lib/std/system/iterators.nim
       (var@4 :`lf.2 .
        (i 64)`lf.0@4)
       (scope@,1
@@ -54,7 +54,7 @@
          (stmts@2,1
           (scope
            (stmts
-            (call@7,4,strbuild.nim add.2.sysvq0asl~3
+            (call@7,4,examples/strbuild.nim add.2.sysvq0asl~3
              (addr~5 s.0.)
              (oconstr@1 string.0.sysvq0asl
               (kv bytes.0 6447362u)
@@ -64,8 +64,8 @@
            (addr@4 `lf.2))))))
       (lab@,1 :whileStmtLabel.1))))
    (lab@4,2 :forStmtLabel.0)
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 s.0.@5,5,strbuild.nim)
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.0.syn1lfpjv stdout.0.syn1lfpjv@6 s.0.@5,5,examples/strbuild.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
  (type :`cchar.0.
   (pragmas
    (importc "char")
@@ -118,12 +118,12 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,strbuild.nim
- (h s.0. 60)
+   (ret 0))))(.index@,1,examples/strbuild.nim
+ (h s.0. 69)
  (x inc.1.Irn1g7r1. 116)
- (h `iniGuard.0. 550)
+ (h `iniGuard.0. 532)
  (x `ini.0. 34)
- (x `cchar.0. 1240)
+ (x `cchar.0. 1261)
  (x `cmdCount.0. 71)
  (x `cmdLine.0. 68)
  (x `nimEnviron.0. 84)

@@ -1,6 +1,6 @@
 (.nif27)
-(.indexat 1599             )
-(stmts@,1,bignum.nim
+(.indexat 1614             )
+(stmts@,1,examples/bignum.nim
  (gvar :`iniGuard.0. .
   (bool).)
  (proc :`ini.0.
@@ -16,10 +16,10 @@
     (true))
    (call `ini.0.sysvq0asl)
    (call `ini.0.syn1lfpjv)
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 1000000@5,2,bignum.nim)
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
-   (call@4,7c,../../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 -42@5,3,bignum.nim)
-   (call@2,7d,../../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 1000000@5,2,examples/bignum.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)
+   (call@4,7c,../nimony/lib/std/syncio.nim write.2.syn1lfpjv stdout.0.syn1lfpjv@6 -42@5,3,examples/bignum.nim)
+   (call@2,7d,../nimony/lib/std/syncio.nim write.7.syn1lfpjv stdout.0.syn1lfpjv@6 '\0A'@E)))
  (type :`cchar.0.
   (pragmas
    (importc "char")
@@ -72,10 +72,10 @@
        (c 8)))`envp.0.))
    (call `ini.0.)
    (call nimFlushStdStreams.0.sysvq0asl)
-   (ret 0))))(.index@,1,bignum.nim
- (h `iniGuard.0. 58)
+   (ret 0))))(.index@,1,examples/bignum.nim
+ (h `iniGuard.0. 67)
  (x `ini.0. 34)
- (x `cchar.0. 623)
+ (x `cchar.0. 629)
  (x `cmdCount.0. 71)
  (x `cmdLine.0. 68)
  (x `nimEnviron.0. 84)
