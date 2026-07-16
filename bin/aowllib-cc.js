@@ -4,12 +4,12 @@
  *   aowllib-cc <module.c.nif> [-o out] [--emit-c file.c] [--cc gcc] [--run]
  *
  * Pipeline:
- *   1. print the module to C with aifc (compileModule, no extern stubs)
+ *   1. print the module to C with aowlc (compileModule, no extern stubs)
  *   2. scan the `.c.nif` for undefined runtime externs (symbols carrying a
  *      module hash and not defined in this module)
  *   3. map each onto an aowllib canonical symbol via RUNTIME (docs/runtime.md);
  *      any unmapped runtime symbol is a hard error listing the gap
- *   4. inject a shim (types + aliases) right after aifc's PRELUDE
+ *   4. inject a shim (types + aliases) right after aowlc's PRELUDE
  *   5. compile + link with the aowllib runtime -> native binary
  *
  * aowllib is the self-owned `system`/`syncio` layer, so only the *main* module's
@@ -21,11 +21,11 @@ const fs = require("fs");
 const path = require("path");
 const cp = require("child_process");
 
-const AIFC = process.env.AOWLLIB_AIFC ||
-  [path.join(process.env.HOME || "", "aifc", "nifc.js"),
-   path.join(__dirname, "..", "..", "aifc", "nifc.js")].find(p => fs.existsSync(p));
-if (!AIFC) { console.error("aowllib-cc: cannot find aifc (nifc.js); set AOWLLIB_AIFC"); process.exit(2); }
-const api = require(AIFC);
+const AOWLC = process.env.AOWLLIB_AOWLC ||
+  [path.join(process.env.HOME || "", "aowlc", "aowlc.js"),
+   path.join(__dirname, "..", "..", "aowlc", "aowlc.js")].find(p => fs.existsSync(p));
+if (!AOWLC) { console.error("aowllib-cc: cannot find aowlc (aowlc.js); set AOWLLIB_AOWLC"); process.exit(2); }
+const api = require(AOWLC);
 const RUNTIME_DIR = path.join(__dirname, "..", "runtime");
 const { RUNTIME, shimTypedefs } = require(path.join(RUNTIME_DIR, "runtime-map.js"));
 
@@ -279,7 +279,7 @@ function main() {
   if (o.emitC && !o.out) { console.log("wrote " + cFile); return; }
 
   const out = o.out || o.input.replace(/\.c\.nif$/, "").replace(/\.nif$/, "") || "a.out";
-  // -w silences aifc's stylistic warnings, but an implicit function declaration
+  // -w silences aowlc's stylistic warnings, but an implicit function declaration
   // is a real defect for us: a runtime function called without a prototype is
   // assumed to return int, which silently truncates 64-bit returns (pointers!).
   // Promote exactly that class back to a hard error.

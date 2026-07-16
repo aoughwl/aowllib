@@ -13,7 +13,7 @@ modules, so only the *main* module's `.c.nif` is compiled — its references int
 
 Those references are **content-addressed**: `write.0.syn1lfpjv` is
 `write`, overload-disambiguator `0`, from the module whose hash is `syn1lfpjv`.
-aifc mangles that to the C identifier `write_0_syn1lfpjv`. The main module's own
+aowlc mangles that to the C identifier `write_0_syn1lfpjv`. The main module's own
 symbols carry an *empty* hash (`main.0.`), so:
 
 > an undefined runtime extern is exactly a referenced symbol atom
@@ -21,7 +21,7 @@ symbols carry an *empty* hash (`main.0.`), so:
 
 `bin/aowllib-cc` collects those, maps each `base` via `runtime/runtime-map.js`
 onto a hash-independent aowllib entry point, and injects a shim right after
-aifc's C prelude:
+aowlc's C prelude:
 
 ```c
 /* ---- aowllib shim (generated) ---- */
@@ -47,12 +47,12 @@ nimony field names plus a `.disamb` — so aowllib pins them; only the type/proc
 
 **Note on `LongString.data`.** nimony declares it `UncheckedArray[char]` (an
 inline flexible array at offset 24). aowllib uses a **pointer** instead, because
-(a) that is exactly what aifc emits for a string-literal const —
+(a) that is exactly what aowlc emits for a string-literal const —
 `(LongString){ .data_0 = "hello" }` stores a pointer to real storage, whereas a
 flexible-array compound literal reserves *no* space and overflows — and (b) it
 lets a heap string be a single allocation (`header + data + NUL`, `data`
 pointing just past the header) so one `free` releases it. String **indexing**
-(`s[i]`) works with this layout because aifc's field access `more->data_0[i]`
+(`s[i]`) works with this layout because aowlc's field access `more->data_0[i]`
 follows the pointer to real storage (see the closing note below).
 
 ## SSO string encoding (`stringimpl.nim`)
@@ -125,10 +125,10 @@ to `high(s)`, empty range → `""`).
 Anything unmapped is printed as a coverage gap and the build fails — the runtime
 is never silently stubbed.
 
-## aifc dependencies
+## aowlc dependencies
 
-aowllib links `aifc`'s printed C. Building the suite exercised (and fixed
-upstream in `aifc`) five printer completeness points:
+aowllib links `aowlc`'s printed C. Building the suite exercised (and fixed
+upstream in `aowlc`) five printer completeness points:
 
 - `(ovf)` — read the overflow flag `(keepovf …)` sets (needed by seq bounds).
 - prototypes for **inline** procs — a monomorphised `static inline` seq helper
@@ -170,7 +170,7 @@ One inheritance operator is **not** usable, and it's a nimony-compiler issue,
 not an aowllib one: the `of` type test (`x of Derived`) — nimony's
 `vtables_backend.nim` emits an `of` check (`display[level] == hash(T)`) whose
 `level` (0) and target hash don't line up with the type's own display array, so
-the test is always false. aowllib/aifc faithfully execute what nimony emits;
+the test is always false. aowllib/aowlc faithfully execute what nimony emits;
 fixing it means fixing nimony's RTTI `of` lowering.
 
 Also out: exceptions across the `eraiser` error-code path beyond `panic`; float
@@ -183,5 +183,5 @@ string comparison `==`/`<`/`<=`/`cmp`, and inheritance with method dispatch are
 all covered now — see above.)
 
 String **indexing** (`s[i]`) *is* covered: because the runtime declares
-`LongString.data` as a pointer, aifc's field-name access `more->data_0[i]`
+`LongString.data` as a pointer, aowlc's field-name access `more->data_0[i]`
 resolves correctly.

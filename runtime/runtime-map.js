@@ -9,7 +9,7 @@
 "use strict";
 
 // Canonical aowllib struct definitions the shim injects (field names are the
-// hash-independent nimony mangled names, so aifc's printed field accesses hit).
+// hash-independent nimony mangled names, so aowlc's printed field accesses hit).
 const STRUCTS = `typedef struct { NI fullLen_0; NI rc_0; NI capImpl_0; NC8* data_0; } Aowllib_LongString;
 typedef struct { NU bytes_0; Aowllib_LongString* more_0; } Aowllib_string;
 typedef struct { NI len_0; void* data_0; } Aowllib_seq;

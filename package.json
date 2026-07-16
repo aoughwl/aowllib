@@ -1,7 +1,7 @@
 {
   "name": "aowllib",
   "version": "0.1.0",
-  "description": "The aowl system module + runtime: the hand-written C runtime that lets real nimony programs (echo, strings, seqs, ref objects with ARC) link and run natively through aifc, with no nimony system.c.nif.",
+  "description": "The aowl system module + runtime: the hand-written C runtime that lets real nimony programs (echo, strings, seqs, ref objects with ARC) link and run natively through aowlc, with no nimony system.c.nif.",
   "bin": { "aowllib-cc": "bin/aowllib-cc.js" },
   "scripts": {
     "test": "bash test/run.sh",

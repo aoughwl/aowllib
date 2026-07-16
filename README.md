@@ -3,14 +3,14 @@
 The **aowl system module + runtime**: the hand-written C runtime that provides
 the `system` / `syncio` symbols a post-`hexer` `.c.nif` references, so **real
 nimony programs — `echo`, strings, seqs, `ref` objects with ARC — link and run
-natively** through [aifc](https://github.com/aoughwl/aifc), with **no** nimony
+natively** through [aowlc](https://github.com/aoughwl/aowlc), with **no** nimony
 54 KB `system.c.nif`.
 
 > Status: **working.** `echo "hello"` and 43 other programs — strings (concat,
 > build, `$`, indexing, `==`/`<`/`<=`, `case`-on-string, `for c in s`, slicing, mutation), seqs
 > (growth, nesting, assignment, return-by-value, bounds checks), case objects, inheritance with method dispatch, `object`/`ref`
 > with heap-typed fields, non-zero-based arrays with bounds panics, `INT64_MIN`
-> and SSO tier boundaries — compile to native binaries through `aifc` + `aowllib`
+> and SSO tier boundaries — compile to native binaries through `aowlc` + `aowllib`
 > and pass a 44/44 acceptance suite, **ASan/UBSan/LSan-clean, leak-free**. This
 > is the biggest unlock in the
 > [aifmony](https://github.com/aoughwl/aifmony) rewrite: it's what lets a program
@@ -54,7 +54,7 @@ shim that aliases them onto aowllib. Any runtime symbol aowllib doesn't cover is
 reported as an explicit coverage gap, never silently stubbed.
 
 ```
-  .c.nif ──aifc.compileModule──▶ C ──inject shim──▶ gcc + runtime/aowllib.c ──▶ native binary
+  .c.nif ──aowlc.compileModule──▶ C ──inject shim──▶ gcc + runtime/aowllib.c ──▶ native binary
              (the printer)         (hashed→aowllib)        (the runtime)
 ```
 
@@ -80,7 +80,7 @@ test/gen-cnif.sh foo.nim foo.c.nif
 node bin/aowllib-cc.js foo.c.nif -o foo && ./foo
 ```
 
-`aowllib-cc` resolves `aifc` from `$AOWLLIB_AIFC`, then `~/aifc/nifc.js`. The
+`aowllib-cc` resolves `aowlc` from `$AOWLLIB_AOWLC`, then `~/aowlc/aowlc.js`. The
 `.nim → .c.nif` step resolves nimony from `$AOWLLIB_NIMONY`, then `~/nimony/bin`.
 
 ## Design notes
@@ -89,7 +89,7 @@ node bin/aowllib-cc.js foo.c.nif -o foo && ./foo
   of `bytes`, tiers short(≤7) / medium(≤14) / long(255) / static(254). Literals
   lower to a static `LongString`; `LongString.data` is a **pointer** (one heap
   allocation per string, header + data + NUL) rather than nimony's inline
-  flexible array — that is exactly what `aifc` emits for a literal const and it
+  flexible array — that is exactly what `aowlc` emits for a literal const and it
   keeps freeing a string a single `free`.
 - **ARC** is single-threaded: `rc` stores `refcount-1` (0 = unique), matching
   `system/arcops.nim`. `=destroy`/`=copy`/`=dup` for strings live here; seq and

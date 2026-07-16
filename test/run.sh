@@ -20,7 +20,7 @@ EXAMPLES=(hello echo_str echo_int concat loopsum strbuild multi
           streq strcmp casestr
           # seqs: growth (recalcCap), nesting, assignment, return-by-value
           seqadd seqnest seqassign retseq
-          # objects/refs with heap-typed fields (aifc value-dep type ordering)
+          # objects/refs with heap-typed fields (aowlc value-dep type ordering)
           refstr objseq
           # string iteration (for c in s -> toOpenArray) and slicing (substr)
           foriter strslice
