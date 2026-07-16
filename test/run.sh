@@ -15,7 +15,7 @@ ex="examples"; exp="test/expected"; work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
 EXAMPLES=(hello echo_str echo_int concat loopsum strbuild multi
-          seqlen seqsum refobj bignum longstr whilei caseof seqstr)
+          seqlen seqsum refobj bignum longstr whilei caseof seqstr stridx)
 
 if [ "${1:-}" = "--regen" ]; then
   echo "== regenerating .c.nif from .nim =="

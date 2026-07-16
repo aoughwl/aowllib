@@ -94,6 +94,10 @@ static Aiflib_LongString* aiflib_longstr_new(const NC8* p, NI n) {
   return h;
 }
 
+NC8 aiflib_str_index(Aiflib_string s, NI i) {
+  return aiflib_str_data(&s)[i];   /* nimony emits the bounds check at the call site */
+}
+
 Aiflib_string aiflib_str_concat(Aiflib_string a, Aiflib_string b) {
   NI la = aiflib_str_len(a), lb = aiflib_str_len(b);
   NI n = la + lb;

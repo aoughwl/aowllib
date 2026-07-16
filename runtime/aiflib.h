@@ -93,6 +93,7 @@ NI            aiflib_str_len(Aiflib_string s);
 const NC8*    aiflib_str_data(const Aiflib_string* s);
 Aiflib_string aiflib_str_from_bytes(const NC8* p, NI n);
 Aiflib_string aiflib_str_concat(Aiflib_string a, Aiflib_string b);
+NC8           aiflib_str_index(Aiflib_string s, NI i);
 void          aiflib_str_add_char(Aiflib_string* s, NC8 c);
 void          aiflib_str_add_str(Aiflib_string* s, Aiflib_string part);
 Aiflib_string aiflib_dollar_int(NI64 x);

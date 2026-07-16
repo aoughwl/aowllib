@@ -34,11 +34,14 @@ const { RUNTIME, shimTypedefs } = require(path.join(RUNTIME_DIR, "runtime-map.js
 // hash. This module's own symbols carry an empty hash (`base.disamb.`).
 const EXTERN_RE = /^`?[^\s()]+\.\d+\.[A-Za-z0-9]{4,}$/;
 
+const deEsc = (s) => s.replace(/\\([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+
 function canon(sym) {                       // `write.7.syn1lfpjv` -> {base,disamb}
   const s = sym.replace(/^`/, "");
   const m = s.match(/^(.+)\.(\d+)\.[A-Za-z0-9]{4,}$/);
   if (!m) return null;
-  return { base: m[1], disamb: m[2], full: sym };
+  // base may be NIF-escaped (e.g. `\5B\5D` for `[]`); expose a readable form too.
+  return { base: m[1], baseReadable: deEsc(m[1]), disamb: m[2], full: sym };
 }
 
 function collectExterns(nodes) {
@@ -171,7 +174,7 @@ function main() {
     const c = canon(sym);
     if (!c) continue;
     const cName = api.mangleToC(sym);
-    const entry = RUNTIME[c.base];
+    const entry = RUNTIME[c.base] || RUNTIME[c.baseReadable];
     if (!entry) { unmapped.push(`${sym}  (base '${c.base}')`); continue; }
     let target;
     if (typeof entry.resolve === "function") target = entry.resolve(info.args.map(a => classifyArg(a, symtab)), c);

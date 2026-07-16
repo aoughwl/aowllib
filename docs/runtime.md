@@ -87,7 +87,7 @@ Symbols the runtime currently provides (see `runtime/runtime-map.js`):
 |---|---|
 | init | `ini` (no-op) |
 | io | `write`(string/char/int/uint/bool/float), `stdout`/`stderr`/`stdin`, `nimFlushStdStreams` |
-| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
+| strings | `&`, `$`(int/uint/bool), `add`(char/str), `len`, `[]` (index), `=destroy`/`=copy`/`=dup`/`=wasMoved` (string) |
 | memory | `alloc`/`alloc0`/`realloc`/`dealloc`/`allocatedSize`, `allocFixed`/`deallocFixed` |
 | arc | `arcInc`/`arcDec`/`arcIsUnique` |
 | panics | `panic`, `nimIcheckB` (bounds), `oomHandler` |
@@ -117,7 +117,12 @@ upstream in `aifc`) three printer completeness points:
 
 ## Not yet covered (future work)
 
-String indexing (`s[i]`, inline `rawData`); exceptions across the `eraiser`
-error-code path beyond `panic`; float `$`; the aowl-source `system` module
-(Phase 2) that would replace this hand-written C with code compiled *through*
-the stack.
+Iterating a string with `for c in s` (needs `toOpenArray` returning an
+`openArray[char]` by value into a module-local `openArray` struct type);
+exceptions across the `eraiser` error-code path beyond `panic`; float `$`; the
+aowl-source `system` module (Phase 2) that would replace this hand-written C
+with code compiled *through* the stack.
+
+String **indexing** (`s[i]`) *is* covered: because the runtime declares
+`LongString.data` as a pointer, aifc's field-name access `more->data_0[i]`
+resolves correctly.
